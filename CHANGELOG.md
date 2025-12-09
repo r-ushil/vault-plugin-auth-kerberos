@@ -1,4 +1,37 @@
-## Unreleased
+## v0.16.0
+### October 3, 2025
+
+* Upgrade Go Version (#137)
+* Automated dependency upgrades (#128)
+* init changie (#135)
+* Add backport assistant workflow (#132)
+* Add backport assistant workflow (#131)
+* [Compliance] - PR Template Changes Required (#129)
+
+## v0.15.0
+### May 30, 2025
+
+### IMPROVEMENTS
+* Bump Go version to 1.24.3
+* update dependencies
+    * `github.com/go-ldap/ldap/v3` v3.4.10 -> v3.4.11\
+    * `github.com/hashicorp/vault/sdk` v0.15.0 -> v0.17.0
+    * `github.com/ory/dockertest/v3` v3.11.0 -> v3.12.0
+    * `github.com/go-jose/go-jose/v4` v4.0.4 -> v4.0.5
+    * `github.com/opencontainers/runc` v1.2.0 -> v1.2.6
+    * `golang.org/x/crypto` v0.32.0 -> v0.36.0
+    * `golang.org/x/net` v0.34.0 -> v0.37.0
+
+## v0.14.0
+### February 12, 2025
+
+### IMPROVEMENTS
+* Bump Go version to 1.23.6
+* update dependencies
+  * `github.com/go-ldap/ldap/v3` v3.4.8 -> v3.4.10
+  * `github.com/hashicorp/vault/api` v1.14.0 -> v1.16.0
+  * `github.com/hashicorp/vault/sdk` v0.13.0 -> v0.15.0
+  * `github.com/ory/dockertest/v3` v3.10.0 -> v3.11.0
 
 ## v0.13.0
 ### September 3, 2024
