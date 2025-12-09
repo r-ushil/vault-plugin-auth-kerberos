@@ -299,19 +299,15 @@ func (b *backend) pathLoginUpdate(ctx context.Context, req *logical.Request, d *
 		Renewable: false,
 	}
 
-	var ttlRaw string
-
-	// If user set "ttl" in the JSON body
+	// If user set "ttl" in the JSON body, parse and apply it
 	if v, ok := d.GetOk("ttl"); ok {
-		ttlRaw = v.(string)
-	}
-
-	// Parse/override
-	if ttlRaw != "" {
-		if userTTL, errTTL := time.ParseDuration(ttlRaw); errTTL == nil {
+		ttlRaw := v.(string)
+		userTTL, err := parseTTL(ttlRaw)
+		if err != nil {
+			return logical.ErrorResponse(fmt.Sprintf("invalid ttl format: %v", err)), nil
+		}
+		if userTTL > 0 {
 			auth.LeaseOptions.TTL = userTTL
-		} else {
-			return logical.ErrorResponse(fmt.Sprintf("invalid ttl format: %v", errTTL)), nil
 		}
 	}
 
@@ -335,6 +331,15 @@ func (b *backend) pathLoginUpdate(ctx context.Context, req *logical.Request, d *
 	return &logical.Response{
 		Auth: auth,
 	}, nil
+}
+
+// parseTTL parses a TTL string and returns the duration.
+// Returns zero duration for empty string, error for invalid format.
+func parseTTL(ttlRaw string) (time.Duration, error) {
+	if ttlRaw == "" {
+		return 0, nil
+	}
+	return time.ParseDuration(ttlRaw)
 }
 
 // simpleResponseWriter is used internally to capture SPNEGO authentication responses
